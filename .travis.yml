@@ -3,23 +3,23 @@ services:
   - docker
 
 before_install:
-  - docker build -t asilva/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t ahmedkhaledre/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run asilva/react-test npm run test -- --coverage
+  - docker run ahmedkhaledre/react-test npm run test -- --coverage
 
 after_success:
-  - docker build -t asilva/multi-client ./client
-  - docker build -t asilva/multi-nginx ./nginx
-  - docker build -t asilva/multi-server ./server
-  - docker build -t asilva/multi-worker ./worker
+  - docker build -t ahmedkhaledre/multi-client ./client
+  - docker build -t ahmedkhaledre/multi-nginx ./nginx
+  - docker build -t ahmedkhaledre/multi-server ./server
+  - docker build -t ahmedkhaledre/multi-worker ./worker
   #login to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #push images
-  - docker push asilva/multi-nginx
-  - docker push asilva/multi-client
-  - docker push asilva/multi-server
-  - docker push asilva/multi-worker
+  - docker push ahmedkhaledre/multi-nginx
+  - docker push ahmedkhaledre/multi-client
+  - docker push ahmedkhaledre/multi-server
+  - docker push ahmedkhaledre/multi-worker
 
 deploy:
   provider: elasticbeanstalk
